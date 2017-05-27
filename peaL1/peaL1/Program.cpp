@@ -9,6 +9,18 @@
 #include <iostream>
 using namespace std;
 
+void Program::CinInt(int &number)
+{
+	cin >> number;
+	while (cin.fail())
+	{
+		cin.clear(); // clear input buffer to restore cin to a usable state
+		cin.ignore(INT_MAX, '\n'); // ignore last input
+		cout << "You can only enter numbers.\n";
+		cout << "Enter a number.\n";
+		cin >> number;
+	}
+}
 void Program::StartTimer()
 {
 
@@ -156,7 +168,7 @@ Knapsack Program::BranchAndBound(Knapsack knapsack)
 }
 
 
-Knapsack Program:: bruteforce(Knapsack knapsack)
+Knapsack Program:: Bruteforce(Knapsack knapsack)
 {
 	int size = knapsack.GetItemsNumber();
 	int *tab = (int *)calloc(size, sizeof(int));

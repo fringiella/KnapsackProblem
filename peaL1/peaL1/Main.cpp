@@ -8,22 +8,12 @@
 using namespace std;
 
 
-void CinIntFail(int number)
-{
-	while (cin.fail())
-	{
-		cin.clear(); // clear input buffer to restore cin to a usable state
-		cin.ignore(INT_MAX, '\n'); // ignore last input
-		cout << "You can only enter numbers.\n";
-		cout << "Enter a number.\n";
-		cin >> number;
-	}
-}
+
 
 void main(void)
 {
 	string lineEnd = "\n";
-	string menuString = "Create knapsack" + lineEnd + "1. Random knapsack " + lineEnd + "2. Knapsack from file" 
+	string menuString = "Create knapsack" + lineEnd + "1. Random knapsack " + lineEnd + "2. Knapsack from file"
 		+ lineEnd;
 	string maxWeightIn = "Max knapsack's weight?" + lineEnd;
 	string numberOfItemsIn = "Number of items?" + lineEnd;
@@ -31,7 +21,7 @@ void main(void)
 	string maxWeightOut = "Knapsack's weight: ";
 	string numberOfItemOut = "Number of items: ";
 
-	string subMenuString = "Choose algorithm " + lineEnd + 
+	string subMenuString = "Choose algorithm " + lineEnd +
 		"1. Bruteforce" + lineEnd + "2. Branch and Bound" + lineEnd
 		+ "3. Back to menu" + lineEnd;
 
@@ -40,14 +30,13 @@ void main(void)
 
 	Program mainProgram;
 	srand(time(NULL));
-	int element, w, choice, licznik = 0;
+	int element = 0, w = 0, choice = 0, licznik = 0;
 	string filename;
 	bool start = true;
 	while (start)
 	{
 		cout << menuString;
-		cin >> choice;
-		CinIntFail(choice);
+		mainProgram.CinInt(choice);
 		switch (choice)
 		{
 		case 1:
@@ -55,8 +44,7 @@ void main(void)
 			while (true)
 			{
 				cout << maxWeightIn;
-				cin >> w;
-				CinIntFail(w);
+				mainProgram.CinInt(w);
 				if (w > 0) break;
 				else cout << "Must be more than 0!" << endl;
 			}
@@ -64,9 +52,8 @@ void main(void)
 			while (true)
 			{
 				cout << numberOfItemsIn;
-				cin >> p;
-				CinIntFail(p);
-				if (p > 1 ) break;
+				mainProgram.CinInt(p);
+				if (p > 1) break;
 				else cout << "Must be more than 1!" << endl;
 			}
 			system("cls");
@@ -80,8 +67,7 @@ void main(void)
 			while (!start)
 			{
 				cout << subMenuString;
-				cin >> choice;
-				CinIntFail(choice);
+				mainProgram.CinInt(choice);
 				cout << endl;
 				switch (choice)
 				{
@@ -90,7 +76,7 @@ void main(void)
 				{
 					double time;
 					mainProgram.StartTimer();
-					Knapsack bestKnapsack = mainProgram.bruteforce(knapsack);
+					Knapsack bestKnapsack = mainProgram.Bruteforce(knapsack);
 					time = mainProgram.GetTimeAndStopTimer();
 					cout << timeString << time << milisecondsString << endl;
 					cout << bestKnapsack.ToString();
@@ -122,8 +108,7 @@ void main(void)
 			while (weight < 1)
 			{
 				cout << maxWeightIn << endl;
-				cin >> weight;
-				CinIntFail(weight);
+				mainProgram.CinInt(weight);
 			}
 
 			ifstream file(filename);
@@ -140,8 +125,7 @@ void main(void)
 				while (!start)
 				{
 					cout << subMenuString;
-					cin >> choice;  
-					CinIntFail(choice);
+					mainProgram.CinInt(choice);
 					cout << endl;
 					switch (choice)
 					{
@@ -149,7 +133,7 @@ void main(void)
 					{
 						double time;
 						mainProgram.StartTimer();
-						Knapsack bestKnapsack = mainProgram.bruteforce(knapsack);
+						Knapsack bestKnapsack = mainProgram.Bruteforce(knapsack);
 						time = mainProgram.GetTimeAndStopTimer();
 						cout << timeString << time << milisecondsString << endl;
 						cout << bestKnapsack.ToString();

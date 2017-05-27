@@ -15,8 +15,7 @@ public:
 	Knapsack GetKnapsackFromFile(string path, int weight);
 	double Bound(Node node, Knapsack knapsack);
 	Knapsack BranchAndBound(Knapsack knapsack);
-	//vector<Knapsack> PowerSet(Knapsack knapsack);
-	//Knapsack Bruteforce(Knapsack knapsack);
-	Knapsack bruteforce(Knapsack knapsack);
+	Knapsack Bruteforce(Knapsack knapsack);
+	void CinInt(int &number);
 };
 #endif
